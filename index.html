@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Openhouseai Challenge</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+    // Create a variable for Get Request
+        const requestpython = (userId,dateFrom,dateTo,actionType) => {
+          const params = new URLSearchParams();
+          params.append('userId', userId)
+          params.append('dateFrom', dateFrom)
+          params.append('dateTo', dateTo)
+          params.append('actionType', actionType)
+
+
+          return fetch('http://0.0.0.0:500/data?' + params.toString(), {
+              method: 'GET',
+          });
+        }
+        </script>
+
+    <style>
+        body {
+            margin: 0;
+            background-color: lightgrey;
+             }
+
+        h1{
+            text-align: center;
+            color: blue;
+            }
+    </style>
+</head>
+<body>
+    <div id="wait" style="text-align: center; display: none">
+                <p>In the process of getting the data</p>
+            </div>
+
+    <div id="user_data" style="text-align: center; display: block">
+    <h1>Please select the combination of the data that you are looking for</h1>
+        <span>Please enter the user name (leave empty if you're not looking for a particular user):</span>
+            <input type="textbox" placeholder="ex. ABC123XYZ" name="userId" value=""/>
+            <br/>
+        <span>Please enter the date range  (leave empty if you're not looking for a date range):</span>
+                    <br/>
+            <span>From: </span>
+            <input type="textbox" placeholder="ex. 2018-10-19" name="dateFrom" value=""/>
+            <span>To: </span>
+            <input type="textbox" placeholder="ex. 2018-10-19" name="dateTo" value=""/>
+            <br/>
+            <span>Please enter the type of activity (leave empty if you're not looking for a particular type):</span>
+            <input type="textbox" placeholder="ex. VIEW" name="actionType" value=""/>
+            <br/>
+            <br/>
+            <button id="submit-data" onclick="rq_server()">submit</button>
+    </div>
+</body>
+
+<script>
+    // send request for to the server
+    function rq_server(){
+
+        var userId = $('input[name=userId]').val();
+        var dateFrom = $('input[name=dateFrom]').val();
+        var dateTo = $('input[name=dateTo]').val();
+        var actionType = $('input[name=actionType]').val();
+
+            $('#user_data').css('display', 'none');
+            $('#wait').css('display', 'block');
+            requestpython(userId,dateFrom,dateTo,actionType).then( (response) => {
+            response.json().then(responseJson => {
+                alert(responseJson)
+                $('#wait').css('display', 'none');
+                $('#user_data').css('display', 'block');
+                })
+            });
+         }
+</script>
+
+</html>

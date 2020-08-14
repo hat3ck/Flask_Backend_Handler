@@ -1,0 +1,29 @@
+{
+  "userId": "ABC123XYZ",
+  "sessionId": "XYZ456ABC",
+  "actions": [
+    {
+      "time": "2018-10-18T21:37:28-06:00",
+      "type": "CLICK",
+      "properties": {
+        "locationX": 52,
+        "locationY": 11
+      }
+    },
+    {
+      "time": "2018-10-18T21:37:30-06:00",
+      "type": "VIEW",
+      "properties": {
+        "viewedId": "FDJKLHSLD"
+      }
+    },
+    {
+      "time": "2018-10-18T21:37:30-06:00",
+      "type": "NAVIGATE",
+      "properties": {
+        "pageFrom": "communities",
+        "pageTo": "inventory"
+      }
+    }
+  ]
+}
